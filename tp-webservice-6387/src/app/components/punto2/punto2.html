@@ -1,0 +1,47 @@
+<div class="page container">
+  <header class="page-header">
+    <h1 class="page-title">Marcas y modelos</h1>
+    <p class="page-subtitle">Elegí una marca para ver sus modelos disponibles.</p>
+  </header>
+
+  <div class="panel" *ngIf="marcas.length > 0; else cargandoMarcas">
+    <ul class="brand-grid">
+      <li *ngFor="let marca of marcas">
+        <button
+          type="button"
+          class="brand-btn"
+          data-bs-toggle="modal"
+          data-bs-target="#modalModelos"
+          (click)="obtenerModelos(marca.id)"
+        >
+          {{ marca.name }}
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <ng-template #cargandoMarcas>
+    <p class="loading-text text-center py-4">Cargando marcas...</p>
+  </ng-template>
+</div>
+
+<div class="modal fade" id="modalModelos" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modal-dark">
+      <div class="modal-header border-0">
+        <h5 class="modal-title">Modelos</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body pt-0">
+        <ul class="model-list" *ngIf="modelos.length > 0; else sinModelos">
+          <li *ngFor="let modelo of modelos" class="model-item">
+            {{ modelo.name }}
+          </li>
+        </ul>
+        <ng-template #sinModelos>
+          <p class="loading-text mb-0">Cargando modelos...</p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="page container">
+  <header class="page-header">
+    <h1 class="page-title">Conversor de monedas</h1>
+    <p class="page-subtitle">Convertí entre distintas divisas en tiempo real.</p>
+  </header>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div class="panel converter-panel" *ngIf="monedas.length > 0; else cargandoMonedas">
+        <label class="form-label">Desde</label>
+        <select class="form-select mb-3" name="from" [(ngModel)]="from">
+          <option *ngFor="let m of monedas" [value]="m.codigo">
+            {{ m.codigo }} — {{ m.nombre }}
+          </option>
+        </select>
+
+        <label class="form-label">Hacia</label>
+        <select class="form-select mb-3" name="to" [(ngModel)]="to">
+          <option *ngFor="let m of monedas" [value]="m.codigo">
+            {{ m.codigo }} — {{ m.nombre }}
+          </option>
+        </select>
+
+        <label class="form-label">Monto</label>
+        <input type="number" class="form-control mb-4" name="monto" [(ngModel)]="monto" min="0" />
+
+        <button type="button" class="btn btn-app btn-app-success w-100" (click)="convertir()">
+          Convertir
+        </button>
+
+        <div class="result-box text-center" *ngIf="resultado != null">
+          {{ monto }} {{ from }} = {{ resultado | number:'1.2-4' }} {{ to }}
+        </div>
+      </div>
+
+      <ng-template #cargandoMonedas>
+        <div class="panel text-center">
+          <p class="loading-text mb-0">Cargando monedas...</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
