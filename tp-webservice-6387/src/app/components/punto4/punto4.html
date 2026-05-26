@@ -1,0 +1,30 @@
+<div class="page container">
+  <header class="page-header">
+    <h1 class="page-title">Texto a audio</h1>
+    <p class="page-subtitle">Escribí un texto y generá el audio con text-to-speech.</p>
+  </header>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+      <div class="panel">
+        <label class="form-label" for="texto-tts">Texto</label>
+        <textarea
+          id="texto-tts"
+          class="form-control mb-4"
+          name="texto"
+          rows="5"
+          [(ngModel)]="texto"
+          placeholder="Escribí algo para convertir a voz..."
+        ></textarea>
+
+        <button type="button" class="btn btn-app btn-app-primary" (click)="generarAudio()">
+          Generar audio
+        </button>
+
+        <div class="audio-wrap" *ngIf="audioUrl">
+          <audio [src]="audioUrl" controls class="audio-player"></audio>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

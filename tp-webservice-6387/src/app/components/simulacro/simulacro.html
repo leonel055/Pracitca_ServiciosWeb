@@ -1,0 +1,88 @@
+ <div>
+        <label>Año</label>
+        <input type="number" [(ngModel)]="year" />
+        <button (click)="obtenerCarreras(year)">Obtener Carreras </button>
+    </div>
+    
+    <div>
+        <label>Año</label>
+        <input type="number" [(ngModel)]="yearC" />
+        <button (click)="obtenerConstructor(yearC)">Obtener Constructor</button>
+    </div>
+
+    
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Race Id</th>
+            <th scope="col">Carrera</th>
+            <th scope="col">Sesiones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let carrera of carreras">
+            <th scope="row">{{ carrera.race_id }}</th>
+            <td>{{ carrera.name }}</td>
+            <th>
+                <ul>
+                    <li *ngFor="let session of carrera.sessions">
+                        <span>{{ session.id }} - {{ session.session_name }}</span>
+                        <button type="submit" (click)="obtenerSesiones(session.id)"  data-bs-toggle="modal"
+                        data-bs-target="#modal"
+                        >Ver Posiciones</button>
+                    </li>
+                </ul>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Position</th>
+            <th scope="col">Team Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">{{ constructores[0]?.position }}</th>
+            <td>{{ constructores[0]?.team_name }}</td>
+          </tr>
+          <tr>
+            <th scope="row">{{ constructores[constructores.length-1]?.position }}</th>
+            <td>{{ constructores[constructores.length-1]?.team_name }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+<div class="modal fade" id="modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-dark">
+        <div class="modal-header border-0">
+          <h5 class="modal-title">Pilotos</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body pt-0">
+        
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Pilotos</th>
+                    <th scope="col">Posiciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let driver of conductores">
+                    <th scope="row">{{ driver.name}}</th>
+                    <td>{{ driver.position }}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
